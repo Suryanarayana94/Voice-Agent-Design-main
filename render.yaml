@@ -2,10 +2,14 @@ services:
   - type: web
     name: homecredit-lap-agent
     runtime: python
+    repo: https://github.com/Suryanarayana94/Voice-Agent-Design-main
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server/app.py --port $PORT
     envVars:
       - key: PYTHONPATH
         value: src
-    build:
-      command: pip install -r requirements.txt
-    start:
-      command: python server/app.py --port $PORT
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    autoDeployTrigger: commit
